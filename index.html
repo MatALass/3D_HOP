@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Collection petite plaisance numérisée - 3DHOP</title>
+
+  <!-- CSS 3DHOP + ton CSS -->
+  <link rel="stylesheet" href="css/3dhop.css" />
+  <link rel="stylesheet" href="css/app.css" />
+
+  <!-- Police Inter (optionnel) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+</head>
+
+<body>
+  <div id="page">
+    <div id="frame">
+
+      <!-- Thumbnails -->
+      <div id="thumbs">
+        <button class="proj-btn" id="btn-p1" type="button" aria-current="true" title="Projet 1">
+          <img src="assets/images/boats/canoe_sadoux.jpg" alt="Projet 1" />
+        </button>
+        <button class="proj-btn" id="btn-p2" type="button" aria-current="false" title="Projet 2">
+          <img src="assets/images/boats/inti-huatana.jpg" alt="Projet 2" />
+        </button>
+        <button class="proj-btn" id="btn-p3" type="button" aria-current="false" title="Projet 3">
+          <img src="assets/images/boats/dinghy_kirie.jpg" alt="Projet 3" />
+        </button>
+      </div>
+
+      <!-- Titles -->
+      <header>
+        <h1 id="topTitle"></h1>
+        <h2 id="topSubtitle"></h2>
+      </header>
+
+      <!-- Content -->
+      <main>
+        <section id="viewer-wrap">
+          <div id="viewer-bg" aria-hidden="true"></div>
+
+          <div id="toolbar" aria-label="Viewer controls">
+            <img id="home"    class="tb-icon" src="assets/images/icons/home.png" alt="Home">
+            <img id="zoomin"  class="tb-icon" src="assets/images/icons/zoom-in.png" alt="Zoom in">
+            <img id="zoomout" class="tb-icon" src="assets/images/icons/zoom-out.png" alt="Zoom out">
+          </div>
+
+          <div id="viewer-footnote">Modèle CC_EA / powered by 3DHOP</div>
+          <canvas id="draw-canvas"></canvas>
+        </section>
+
+        <aside>
+          <div class="panel" id="planPanel">
+            <img id="projectPlan" src="" alt="Plan du projet" />
+          </div>
+
+          <div class="panel" id="textPanel">
+            <div id="projectText"></div>
+          </div>
+        </aside>
+      </main>
+
+      <!-- Footer -->
+      <footer>
+        <h2 id="bottomTitle">COLLECTION PETITE PLAISANCE</h2>
+        <img id="logo" src="assets/images/logos/logo_AMMLR_40_ans.png" alt="Logo AAMMLR" />
+      </footer>
+
+    </div>
+  </div>
+
+  <script src="js/3dhop/spidergl.js"></script>
+  <script src="js/3dhop/nexus.js"></script>
+  <script src="js/3dhop/ply.js"></script>
+  <script src="js/3dhop/trackball_turntable.js"></script>
+  <script src="js/3dhop/trackball_turntable_pan.js"></script>
+  <script src="js/3dhop/trackball_pantilt.js"></script>
+  <script src="js/3dhop/trackball_sphere.js"></script>
+  <script src="js/3dhop/presenter.js"></script>
+  <script src="js/3dhop/init.js"></script>
+  
+  <script src="js/app.js"></script>
+</body>
+</html>

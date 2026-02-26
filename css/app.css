@@ -1,0 +1,276 @@
+:root{
+  --page-pad: 18px;
+  --gap: 16px;
+  --border: #111;
+  --page-bg: #fff;
+
+  --thumb-size: 72px;
+
+  --right-col: 520px;
+  --plan-h: 320px;
+
+  --top-title-size: 46px;
+  --bottom-title-size: 44px;
+
+  --panel-border: rgba(0,0,0,.35);
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  background: #f3f3f3;
+  font-family: "Inter", Arial, Helvetica, sans-serif;
+}
+
+#page{
+  height: 100vh;
+  width: 100vw;
+  box-sizing: border-box;
+  padding: var(--page-pad);
+}
+
+#frame{
+  width: calc(100vw - 2*var(--page-pad));
+  height: calc(100vh - 2*var(--page-pad));
+  background: var(--page-bg);
+  border: 2px solid var(--border);
+  box-sizing: border-box;
+  padding: 18px;
+  position: relative;
+
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  gap: 14px;
+  overflow: hidden;
+}
+
+/* Thumbs */
+#thumbs{
+  position: absolute;
+  top: 18px;
+  left: 18px;
+  display: flex;
+  gap: 10px;
+  z-index: 50; /* ⬆️ au-dessus de tout */
+}
+
+.proj-btn{
+  width: var(--thumb-size);
+  height: var(--thumb-size);
+  border: 1px solid rgba(0,0,0,.35);
+  background: #fff;
+  padding: 0;
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(0,0,0,.15);
+  overflow: hidden;
+}
+
+.proj-btn img{
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.proj-btn[aria-current="true"] img{
+  filter: grayscale(100%) brightness(0.9);
+  opacity: 0.75;
+}
+
+/* Titles */
+header{
+  padding-top: 12px;
+  text-align: center;
+  pointer-events: none; /* ok: le header ne doit pas capter les drags */
+}
+
+#topTitle{
+  margin: 0;
+  font-size: var(--top-title-size);
+  font-weight: 800;
+  line-height: 1.05;
+}
+
+#topSubtitle{
+  margin: 6px 0 0 0;
+  font-size: calc(var(--top-title-size) * 0.72);
+  font-weight: 800;
+  line-height: 1.05;
+}
+
+/* Layout */
+main{
+  min-height: 0;
+  display: grid;
+  grid-template-columns: 1fr var(--right-col);
+  gap: var(--gap);
+}
+
+/* =========================
+   Viewer (FIX INTERACTION)
+   ========================= */
+#viewer-wrap{
+  position: relative;
+  min-height: 0;
+  overflow: hidden;
+  background: #eee;
+
+  /* ✅ IMPORTANT : prends la hauteur dispo du grid (au lieu d'un 70vh) */
+  height: 100%;
+}
+
+/* ✅ Background doit être "click-through" */
+#viewer-bg{
+  position: absolute;
+  inset: 0;
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+  opacity: 0.20;
+  z-index: 0;
+
+  pointer-events: none; /* ✅ clé */
+}
+
+/* ✅ Canvas doit couvrir toute la zone et recevoir les events */
+#draw-canvas{
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  display: block;
+  width: 100%;
+  height: 100%;
+  background: transparent;
+
+  pointer-events: auto;
+  touch-action: none; /* ✅ drag = rotation, pas scroll */
+}
+
+/* Toolbar */
+#toolbar{
+  position: absolute;
+  right: 12px;
+  bottom: 12px;
+  z-index: 20;
+  display: flex;
+  gap: 8px;
+  align-items: center;
+
+  pointer-events: none; /* explicit */
+}
+
+#toolbar.vertical{
+  left: 12px;
+  top: 120px;
+  right: auto;
+  bottom: auto;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 6px;
+}
+
+.tb-icon{
+  width: 34px;
+  height: 34px;
+  cursor: pointer;
+  display: block;
+  filter: drop-shadow(0 2px 3px rgba(0,0,0,.25));
+  pointer-events: auto;
+}
+
+/* ✅ Footnote : évite qu’il bloque un drag si tu cliques dessus */
+#viewer-footnote{
+  position: absolute;
+  left: 14px;
+  bottom: 10px;
+  z-index: 21;
+  font-size: 12px;
+  color: rgba(0,0,0,.55);
+  background: rgba(255,255,255,.55);
+  padding: 4px 6px;
+  border-radius: 2px;
+
+  pointer-events: none; /* ✅ clé */
+}
+
+/* Right panels */
+aside{
+  min-height: 0;
+  display: grid;
+  grid-template-rows: var(--plan-h) 1fr;
+  gap: var(--gap);
+}
+
+.panel{
+  border: 2px solid var(--panel-border);
+  background: rgba(255,255,255,.85);
+  padding: 10px;
+  min-height: 0;
+}
+
+#planPanel img{
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  background: #fff;
+}
+
+#textPanel{
+  overflow: auto;
+}
+
+#projectText{
+  font-size: 14px;
+  line-height: 1.35;
+}
+
+/* Footer */
+footer{
+  display: grid;
+  grid-template-columns: 1fr var(--right-col);
+  align-items: start;      /* 🔥 au lieu de end */
+  gap: var(--gap);
+  padding-top: 0;
+}
+
+/* Titre */
+#bottomTitle{
+  margin: 0;
+
+  text-align: center;
+
+  font-size: 64px;
+  font-weight: 900;
+  line-height: 1;
+  text-transform: uppercase;
+
+  padding-top: 10px;  /* ajuste si besoin */
+}
+
+/* Logo */
+#logo{
+  justify-self: end;
+  align-self: end;   /* 🔥 logo reste collé en bas */
+  width: 160px;
+  height: auto;
+  display: block;
+}
+
+/* Responsive */
+@media (max-width: 980px){
+  main{
+    grid-template-columns: 1fr;
+    grid-template-rows: 60vh auto;
+  }
+  aside{
+    grid-template-rows: 240px 240px;
+  }
+  #topTitle{ font-size: 36px; }
+  #topSubtitle{ font-size: 26px; }
+  #bottomTitle{ font-size: 34px; }
+
+  /* en mobile, le viewer doit quand même être interactif */
+  #viewer-wrap{ height: 60vh; }
+}
