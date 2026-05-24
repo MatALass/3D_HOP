@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Collection Petite Plaisance Numérisée — Musée Maritime La Rochelle</title>
+
+  <link rel="stylesheet" href="css/3dhop.css" />
+  <link rel="stylesheet" href="css/app.css" />
+</head>
+
+<body>
+  <div id="page">
+    <div id="frame">
+
+      <!-- Miniatures de sélection : générées dynamiquement par app.js -->
+      <div id="thumbs" role="tablist" aria-label="Sélection du modèle 3D"></div>
+
+      <!-- Titres -->
+      <header>
+        <h1 id="topTitle"></h1>
+        <h2 id="topSubtitle"></h2>
+      </header>
+
+      <!-- Contenu principal -->
+      <main>
+        <section id="viewer-wrap">
+          <div id="viewer-bg" aria-hidden="true"></div>
+
+          <div id="toolbar" aria-label="Contrôles de la vue 3D">
+            <img id="home"    class="tb-icon" src="assets/images/icons/home.png"     alt="Recentrer" />
+            <img id="zoomin"  class="tb-icon" src="assets/images/icons/zoom-in.png"  alt="Zoom avant" />
+            <img id="zoomout" class="tb-icon" src="assets/images/icons/zoom-out.png" alt="Zoom arrière" />
+          </div>
+
+          <div id="viewer-footnote"></div>
+          <canvas id="draw-canvas"></canvas>
+
+          <!-- Overlay de chargement (affiché pendant le streaming Nexus) -->
+          <div id="loading-overlay" aria-live="polite">
+            <div class="loading-spinner" aria-hidden="true"></div>
+            <p class="loading-msg">Chargement du modèle 3D…</p>
+          </div>
+        </section>
+
+        <aside>
+          <div class="panel" id="planPanel">
+            <img id="projectPlan" src="" alt="Plan du projet" />
+          </div>
+
+          <div class="panel" id="textPanel">
+            <div id="projectText"></div>
+          </div>
+        </aside>
+      </main>
+
+      <!-- Footer -->
+      <footer>
+        <h2 id="bottomTitle">COLLECTION PETITE PLAISANCE</h2>
+        <img id="logo" src="assets/images/logos/logo_AMMLR_40_ans.png" alt="Logo Les Amis du Musée Maritime La Rochelle" />
+      </footer>
+
+    </div>
+  </div>
+
+  <!-- Overlay erreur fatale (config introuvable, WebGL absent, etc.) -->
+  <div id="fatal-error" role="alertdialog">
+    <div class="fatal-box">
+      <h2 class="fatal-title"></h2>
+      <pre class="fatal-detail"></pre>
+      <p class="fatal-hint">Veuillez contacter l'administrateur de la borne.</p>
+    </div>
+  </div>
+
+  <!-- Scripts 3DHOP (corto/meco sont chargés dynamiquement en Worker par nexus.js) -->
+  <script src="js/3dhop/spidergl.js"></script>
+  <script src="js/3dhop/nexus.js"></script>
+  <script src="js/3dhop/trackball_turntable.js"></script>
+  <script src="js/3dhop/presenter.js"></script>
+
+  <!-- Code applicatif -->
+  <script src="js/app.js"></script>
+
+  <!-- Robustesse kiosque (auto-reset, watchdog, anti-curieux, diagnostic) -->
+  <script src="js/kiosk.js"></script>
+</body>
+</html>

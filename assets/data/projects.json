@@ -1,0 +1,42 @@
+{
+  "_comment": "Configuration des bateaux de la collection. Le client peut éditer ce fichier avec n'importe quel éditeur de texte (Bloc-notes, VS Code, etc.). Voir README-EDITION.md pour les instructions.",
+
+  "projects": [
+    {
+      "id": 1,
+      "nxz": "assets/models/canoe_sadoux.nxz",
+      "thumbnail": "assets/images/boats/canoe_sadoux.jpg",
+      "topTitle": "LE PINGOIN",
+      "topSubtitle": "CANOË SADOUX",
+      "plan": "assets/images/plans/plan_canoe_sadoux.png",
+      "bg": "assets/images/backgrounds/fond_CC_2b.png",
+      "toolbar": "bottom-right",
+      "footnote": "Modèle CC_EA / powered by 3DHOP",
+      "text": "<h3>Le Pingoin — Canoë Sadoux</h3><p>Texte de présentation du canoë Sadoux. À compléter par le client : période, propriétaire historique, particularités techniques, anecdotes…</p>"
+    },
+    {
+      "id": 2,
+      "nxz": "assets/models/inti_huatana.nxz",
+      "thumbnail": "assets/images/boats/inti-huatana.jpg",
+      "topTitle": "INTI HUATANA",
+      "topSubtitle": "YOLE D’AVIRON",
+      "plan": "assets/images/plans/plan_inti_huatana.png",
+      "bg": "assets/images/backgrounds/fond_CC_4b.png",
+      "toolbar": "left-vertical",
+      "footnote": "Modèle CC_EA / powered by 3DHOP",
+      "text": "<h3>Inti Huatana — Yole d'aviron</h3><p>Texte de présentation de la yole. À compléter par le client.</p>"
+    },
+    {
+      "id": 3,
+      "nxz": "assets/models/dinghy_kirie.nxz",
+      "thumbnail": "assets/images/boats/dinghy_kirie.jpg",
+      "topTitle": "LA JOSETTE",
+      "topSubtitle": "DINGHY KIRIÉ",
+      "plan": "assets/images/plans/plan_dinghy_kirie.png",
+      "bg": "assets/images/backgrounds/fond_CC_2b.png",
+      "toolbar": "bottom-right",
+      "footnote": "Modèle CC_EA / powered by 3DHOP",
+      "text": "<h3>La Josette — Dinghy Kirié</h3><p>Texte de présentation du dinghy. À compléter par le client.</p>"
+    }
+  ]
+}

@@ -1,0 +1,111 @@
+# =============================================================================
+# .gitignore — Collection Petite Plaisance / Borne 3D
+# =============================================================================
+
+# -----------------------------------------------------------------------------
+# Modèles 3D (volumineux, à récupérer depuis le stockage du client)
+# -----------------------------------------------------------------------------
+assets/models/*.nxz
+
+# -----------------------------------------------------------------------------
+# Binaire du serveur web embarqué (à télécharger depuis GitHub officiel)
+# Voir tools/README.md pour les instructions
+# -----------------------------------------------------------------------------
+tools/static-web-server*
+!tools/README.md
+
+# -----------------------------------------------------------------------------
+# Profil navigateur isolé (créé au runtime par start.bat en mode kiosque)
+# Peut atteindre plusieurs centaines de Mo (cache Edge/Chrome)
+# -----------------------------------------------------------------------------
+.borne-profile/
+*-profile/
+
+# -----------------------------------------------------------------------------
+# Logs et fichiers temporaires
+# -----------------------------------------------------------------------------
+*.log
+logs/
+*.tmp
+*.temp
+
+# -----------------------------------------------------------------------------
+# Backups d'éditeurs (Bloc-notes, gedit, vim, etc.)
+# -----------------------------------------------------------------------------
+*.bak
+*.backup
+*.orig
+*.swp
+*.swo
+*~
+.#*
+\#*\#
+
+# -----------------------------------------------------------------------------
+# Configuration IDE / éditeurs
+# -----------------------------------------------------------------------------
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+.project
+.settings/
+.classpath
+nbproject/
+
+# -----------------------------------------------------------------------------
+# Fichiers Node.js (si jamais quelqu'un installe http-server localement)
+# -----------------------------------------------------------------------------
+node_modules/
+package-lock.json
+yarn.lock
+.npm/
+.yarn/
+
+# -----------------------------------------------------------------------------
+# Windows
+# -----------------------------------------------------------------------------
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+*.cab
+*.msi
+*.msm
+*.msp
+*.lnk
+
+# -----------------------------------------------------------------------------
+# macOS
+# -----------------------------------------------------------------------------
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+.Spotlight-V100
+.Trashes
+.AppleDB
+.AppleDesktop
+Network Trash Folder
+Temporary Items
+.apdisk
+
+# -----------------------------------------------------------------------------
+# Linux
+# -----------------------------------------------------------------------------
+*~
+.fuse_hidden*
+.directory
+.Trash-*
+.nfs*
+
+# -----------------------------------------------------------------------------
+# Archives (zips de phases livrées pendant le dev, pas à versionner)
+# -----------------------------------------------------------------------------
+*.zip
+*.tar.gz
+*.7z
+*.rar
+
+# Mais on garde les exports/zips officiels si besoin (à débloquer si nécessaire)
+# !releases/*.zip

@@ -1,0 +1,5 @@
+# Ce dossier doit contenir les fichiers .nxz des modèles 3D.
+# Téléchargez-les depuis Cloudflare R2 et placez-les ici :
+#   - canoe_sadoux.nxz
+#   - inti_huatana.nxz
+#   - dinghy_kirie.nxz

@@ -1,0 +1,600 @@
+/* =============================================================================
+   app.css — Collection Petite Plaisance
+   Phase 4 : responsive multi-format (16:9, 16:10, portrait, ultrawide, tactile)
+
+   Stratégie :
+   - Variables CSS avec clamp() pour la fluidité par défaut
+   - Media queries sur aspect-ratio (pas width) pour gérer les formats
+   - Détection tactile via @media (hover: none) and (pointer: coarse)
+   - Anti-scroll strict (un kiosque ne doit jamais scroller la page)
+   ============================================================================= */
+
+/* -----------------------------------------------------------------------------
+   1. Polices Inter en local
+   ----------------------------------------------------------------------------- */
+@font-face {
+  font-family: 'Inter';
+  src: url('../fonts/Inter-VariableFont.ttf') format('truetype-variations');
+  font-weight: 100 900;
+  font-style:  normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Inter';
+  src: url('../fonts/Inter-Italic-VariableFont.ttf') format('truetype-variations');
+  font-weight: 100 900;
+  font-style:  italic;
+  font-display: swap;
+}
+
+/* -----------------------------------------------------------------------------
+   2. Variables CSS — fluides par défaut, override par media queries
+   ----------------------------------------------------------------------------- */
+:root {
+  /* Marges */
+  --page-pad: clamp(10px, 1.5vw, 24px);
+  --gap:      clamp(10px, 1.2vw, 20px);
+
+  /* Couleurs */
+  --page-bg:       #f3f3f3;
+  --frame-bg:      #ffffff;
+  --frame-border:  #111111;
+  --panel-border:  rgba(0, 0, 0, 0.35);
+  --accent-active: #1a3a52;
+  --text-muted:    rgba(0, 0, 0, 0.55);
+
+  /* Miniatures */
+  --thumb-size:  clamp(56px, 6vw, 96px);
+  --thumb-gap:   clamp(6px, 0.8vw, 12px);
+
+  /* Colonnes */
+  --right-col:   clamp(320px, 28vw, 560px);
+  --plan-h:      clamp(180px, 22vh, 360px);
+
+  /* Typographie */
+  --top-title-size:    clamp(28px, 3.6vw, 56px);
+  --bottom-title-size: clamp(32px, 5vw, 76px);
+  --subtitle-ratio:    0.72;
+
+  /* Toolbar */
+  --tb-icon-size: clamp(28px, 2.4vw, 44px);
+}
+
+/* -----------------------------------------------------------------------------
+   3. Reset & base — anti-scroll strict pour kiosque
+   ----------------------------------------------------------------------------- */
+html, body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  background: var(--page-bg);
+  font-family: 'Inter', Arial, Helvetica, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
+  /* Crucial pour kiosque : pas de scroll possible */
+  overflow: hidden;
+  overscroll-behavior: none;
+}
+
+/* Empêcher la sélection texte partout sauf dans le panneau de texte */
+body {
+  user-select: none;
+  -webkit-user-select: none;
+}
+#projectText {
+  user-select: text;
+  -webkit-user-select: text;
+}
+
+#page {
+  height: 100vh;
+  width: 100vw;
+  box-sizing: border-box;
+  padding: var(--page-pad);
+}
+
+/* Conteneur principal — occupe toute la largeur disponible */
+#frame {
+  width:  calc(100vw - 2 * var(--page-pad));
+  height: calc(100vh - 2 * var(--page-pad));
+  background: var(--frame-bg);
+  border: 2px solid var(--frame-border);
+  box-sizing: border-box;
+  padding: var(--page-pad);
+  position: relative;
+
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  gap: var(--gap);
+  overflow: hidden;
+}
+
+/* -----------------------------------------------------------------------------
+   4. Miniatures
+   ----------------------------------------------------------------------------- */
+#thumbs {
+  position: absolute;
+  top: var(--page-pad);
+  left: var(--page-pad);
+  display: flex;
+  gap: var(--thumb-gap);
+  z-index: 50;
+  flex-wrap: wrap;
+  max-width: 60vw;
+}
+
+.proj-btn {
+  width:  var(--thumb-size);
+  height: var(--thumb-size);
+  border: 1px solid rgba(0, 0, 0, 0.35);
+  background: #fff;
+  padding: 0;
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  overflow: hidden;
+  display: block;
+  flex-shrink: 0;
+
+  transition:
+    transform 0.18s ease,
+    box-shadow 0.18s ease,
+    border-color 0.18s ease;
+}
+
+.proj-btn img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  pointer-events: none;
+  user-select: none;
+}
+
+/* Hover seulement sur les inactifs */
+.proj-btn:hover:not([aria-current="true"]) {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.22);
+}
+
+.proj-btn[aria-current="true"] {
+  border: 3px solid var(--accent-active);
+  box-shadow:
+    0 0 0 2px rgba(26, 58, 82, 0.15),
+    0 2px 8px rgba(0, 0, 0, 0.15);
+  cursor: default;
+}
+
+.proj-btn:focus-visible {
+  outline: 2px solid var(--accent-active);
+  outline-offset: 2px;
+}
+
+/* -----------------------------------------------------------------------------
+   5. Header (titres)
+   ----------------------------------------------------------------------------- */
+header {
+  padding-top: 12px;
+  text-align: center;
+  pointer-events: none;
+}
+
+#topTitle {
+  margin: 0;
+  font-size: var(--top-title-size);
+  font-weight: 800;
+  line-height: 1.05;
+}
+
+#topSubtitle {
+  margin: 6px 0 0 0;
+  font-size: calc(var(--top-title-size) * var(--subtitle-ratio));
+  font-weight: 800;
+  line-height: 1.05;
+}
+
+/* -----------------------------------------------------------------------------
+   6. Layout principal (defaults : desktop 16:9)
+   ----------------------------------------------------------------------------- */
+main {
+  min-height: 0;
+  display: grid;
+  grid-template-columns: 1fr var(--right-col);
+  gap: var(--gap);
+}
+
+/* -----------------------------------------------------------------------------
+   7. Viewer 3D
+   ----------------------------------------------------------------------------- */
+#viewer-wrap {
+  position: relative;
+  min-height: 0;
+  overflow: hidden;
+  background: #eee;
+  height: 100%;
+}
+
+#viewer-bg {
+  position: absolute;
+  inset: 0;
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+  opacity: 0.20;
+  z-index: 0;
+  pointer-events: none;
+}
+
+#draw-canvas {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  display: block;
+  width: 100%;
+  height: 100%;
+  background: transparent;
+  pointer-events: auto;
+  touch-action: none;
+}
+
+/* -----------------------------------------------------------------------------
+   8. Toolbar
+   ----------------------------------------------------------------------------- */
+#toolbar {
+  position: absolute;
+  right: 12px;
+  bottom: 12px;
+  z-index: 20;
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  pointer-events: none;
+}
+
+#toolbar.vertical {
+  left: 12px;
+  top: 12px;
+  right: auto;
+  bottom: auto;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 6px;
+}
+
+.tb-icon {
+  width:  var(--tb-icon-size);
+  height: var(--tb-icon-size);
+  cursor: pointer;
+  display: block;
+  filter: drop-shadow(0 2px 3px rgba(0, 0, 0, 0.25));
+  pointer-events: auto;
+  opacity: 0.5;
+  transition: opacity 0.15s ease;
+  user-select: none;
+}
+
+.tb-icon:hover { opacity: 0.8; }
+.tb-icon:active { opacity: 1.0; }
+
+/* -----------------------------------------------------------------------------
+   9. Footnote viewer
+   ----------------------------------------------------------------------------- */
+#viewer-footnote {
+  position: absolute;
+  left: 14px;
+  bottom: 10px;
+  z-index: 21;
+  font-size: clamp(10px, 0.75vw, 13px);
+  color: var(--text-muted);
+  background: rgba(255, 255, 255, 0.55);
+  padding: 4px 6px;
+  border-radius: 2px;
+  pointer-events: none;
+}
+
+/* -----------------------------------------------------------------------------
+   10. Panneaux droite (plan + texte)
+   ----------------------------------------------------------------------------- */
+aside {
+  min-height: 0;
+  display: grid;
+  grid-template-rows: var(--plan-h) 1fr;
+  gap: var(--gap);
+}
+
+.panel {
+  border: 2px solid var(--panel-border);
+  background: rgba(255, 255, 255, 0.85);
+  padding: 10px;
+  min-height: 0;
+}
+
+#planPanel img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  background: #fff;
+}
+
+#textPanel { overflow: auto; }
+
+#projectText {
+  font-size: clamp(13px, 0.95vw, 16px);
+  line-height: 1.45;
+}
+
+#projectText h3 {
+  margin: 0 0 8px 0;
+  font-size: clamp(14px, 1.05vw, 18px);
+  font-weight: 700;
+}
+
+#projectText p { margin: 0 0 8px 0; }
+
+/* -----------------------------------------------------------------------------
+   11. Footer
+   ----------------------------------------------------------------------------- */
+footer {
+  display: grid;
+  grid-template-columns: 1fr var(--right-col);
+  align-items: start;
+  gap: var(--gap);
+  padding-top: 0;
+}
+
+#bottomTitle {
+  margin: 0;
+  text-align: center;
+  font-size: var(--bottom-title-size);
+  font-weight: 900;
+  line-height: 1;
+  text-transform: uppercase;
+  padding-top: 10px;
+}
+
+#logo {
+  justify-self: end;
+  align-self: end;
+  width: clamp(110px, 12vw, 200px);
+  height: auto;
+  display: block;
+}
+
+/* -----------------------------------------------------------------------------
+   12. Loading overlay
+   ----------------------------------------------------------------------------- */
+#loading-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 30;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.85);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.25s ease;
+}
+
+#loading-overlay.visible { opacity: 1; pointer-events: auto; }
+
+.loading-spinner {
+  width: clamp(36px, 4vw, 64px);
+  height: clamp(36px, 4vw, 64px);
+  border: 4px solid rgba(0, 0, 0, 0.1);
+  border-top-color: var(--accent-active);
+  border-radius: 50%;
+  animation: spin 0.9s linear infinite;
+  margin-bottom: 16px;
+}
+
+#loading-overlay.error .loading-spinner { display: none; }
+
+.loading-msg {
+  font-size: clamp(13px, 1vw, 16px);
+  color: var(--text-muted);
+  margin: 0;
+  text-align: center;
+  padding: 0 16px;
+}
+
+#loading-overlay.error .loading-msg {
+  color: #c8102e;
+  font-weight: 600;
+}
+
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* -----------------------------------------------------------------------------
+   13. Fatal error overlay
+   ----------------------------------------------------------------------------- */
+#fatal-error {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.7);
+  padding: 24px;
+}
+
+#fatal-error.visible { display: flex; }
+
+.fatal-box {
+  background: #fff;
+  border: 2px solid #c8102e;
+  max-width: 600px;
+  padding: 32px;
+  font-family: 'Inter', sans-serif;
+}
+
+.fatal-title {
+  margin: 0 0 16px 0;
+  font-size: 22px;
+  color: #c8102e;
+}
+
+.fatal-detail {
+  margin: 0 0 16px 0;
+  font-family: 'Courier New', monospace;
+  font-size: 12px;
+  background: #f5f5f5;
+  padding: 12px;
+  border-radius: 4px;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+.fatal-hint {
+  margin: 0;
+  font-size: 14px;
+  color: var(--text-muted);
+}
+
+/* =============================================================================
+   14. RESPONSIVE — Media queries par format
+   =============================================================================
+   Stratégie : on règle la STRUCTURE selon le format (aspect-ratio), pas selon
+   la largeur seule. Un écran 4K portrait passe par les mêmes règles qu'un
+   écran HD portrait.
+   ============================================================================= */
+
+/* -----------------------------------------------------------------------------
+   14.1. PORTRAIT — totem ou tablette verticale
+   ⚠️ HORS PÉRIMÈTRE ACTUEL : le portrait n'est pas livré pour l'instant.
+   On se concentre sur les formats paysage (16:9, 16:10, ultrawide).
+   Le code d'un layout empilé vertical reste préparé en commentaire ci-dessous
+   pour activation ultérieure si nécessaire.
+   ----------------------------------------------------------------------------- */
+
+/*
+@media (max-aspect-ratio: 1/1) {
+  :root {
+    --right-col:   100%;
+    --plan-h:      clamp(140px, 18vh, 280px);
+    --thumb-size:  clamp(72px, 9vw, 110px);
+    --top-title-size:    clamp(24px, 4vw, 48px);
+    --bottom-title-size: clamp(28px, 6vw, 64px);
+  }
+
+  #frame {
+    grid-template-rows: auto auto 1fr auto auto;
+  }
+
+  #thumbs {
+    position: static;
+    justify-content: center;
+    margin-top: 4px;
+    max-width: 100%;
+  }
+
+  main {
+    grid-template-columns: 1fr;
+    grid-template-rows: minmax(40vh, 1fr) auto;
+    gap: var(--gap);
+  }
+
+  #viewer-wrap {
+    min-height: 40vh;
+  }
+
+  aside {
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto;
+    height: clamp(180px, 28vh, 360px);
+  }
+
+  footer {
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
+
+  #logo {
+    justify-self: center;
+    align-self: center;
+    margin-top: 4px;
+  }
+}
+*/
+
+/* -----------------------------------------------------------------------------
+   14.3. ULTRAWIDE — 21:9, 32:9
+   Critère : ratio largeur/hauteur >= 2 (vraiment large)
+   Choix : on AGRANDIT tout proportionnellement (pas de limitation de largeur).
+   Le viewer 3D et les panneaux prennent plus de place naturellement.
+   ----------------------------------------------------------------------------- */
+@media (min-aspect-ratio: 2/1) {
+  :root {
+    /* Colonne droite plus large proportionnellement */
+    --right-col:         clamp(420px, 26vw, 800px);
+    /* Titres agrandis */
+    --top-title-size:    clamp(40px, 4vw, 96px);
+    --bottom-title-size: clamp(48px, 5.5vw, 128px);
+    /* Miniatures plus grandes */
+    --thumb-size:        clamp(80px, 7vw, 140px);
+    /* Toolbar plus grande */
+    --tb-icon-size:      clamp(40px, 3vw, 64px);
+    /* Plan plus haut */
+    --plan-h:            clamp(240px, 28vh, 480px);
+  }
+}
+
+/* -----------------------------------------------------------------------------
+   14.4. GRAND ÉCRAN — 4K 16:9
+   Critère : très haute résolution en paysage standard
+   On agrandit les éléments pour rester lisibles à distance.
+   ----------------------------------------------------------------------------- */
+@media (min-width: 2560px) and (min-aspect-ratio: 4/3) and (max-aspect-ratio: 2/1) {
+  :root {
+    --thumb-size:        clamp(96px, 6vw, 140px);
+    --tb-icon-size:      clamp(44px, 3vw, 72px);
+    --top-title-size:    clamp(48px, 4vw, 88px);
+    --bottom-title-size: clamp(60px, 6vw, 120px);
+  }
+}
+
+/* -----------------------------------------------------------------------------
+   14.5. TACTILE — détection via hover:none et pointer:coarse
+   S'applique en plus des règles ci-dessus.
+   ----------------------------------------------------------------------------- */
+@media (hover: none) and (pointer: coarse) {
+  :root {
+    /* Miniatures plus grandes pour tap confortable */
+    --thumb-size:    clamp(80px, 10vw, 120px);
+    --thumb-gap:     clamp(10px, 1.5vw, 18px);
+    /* Toolbar plus grande */
+    --tb-icon-size:  clamp(44px, 4vw, 64px);
+  }
+
+  /* Pas d'effet hover (n'a pas de sens en tactile) */
+  .proj-btn:hover:not([aria-current="true"]) {
+    transform: none;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  }
+
+  /* Active state plus visible au tap */
+  .proj-btn:active {
+    transform: scale(0.95);
+  }
+
+  /* Toolbar gap augmenté en tactile */
+  #toolbar { gap: clamp(8px, 1.5vw, 16px); }
+
+  /* Désactiver les transitions de hover (saccades en tactile) */
+  .tb-icon { transition: none; }
+  .tb-icon:hover { opacity: 0.5; }   /* annule le :hover */
+  .tb-icon:active { opacity: 1.0; }
+}
+
+/* -----------------------------------------------------------------------------
+   14.6. ÉCRANS HAUTE DENSITÉ (Retina, 4K avec scaling)
+   ----------------------------------------------------------------------------- */
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+  /* Améliore le rendu des polices sur écrans HiDPI */
+  body {
+    -webkit-font-smoothing: subpixel-antialiased;
+  }
+}
