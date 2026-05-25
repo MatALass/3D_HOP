@@ -1,5 +1,12 @@
 # Ce dossier doit contenir les fichiers .nxz des modèles 3D.
-# Téléchargez-les depuis Cloudflare R2 et placez-les ici :
+# Téléchargez-les depuis votre stockage (Cloudflare R2 ou autre) et placez-les ici :
+#
+# Bateaux d'origine :
 #   - canoe_sadoux.nxz
 #   - inti_huatana.nxz
 #   - dinghy_kirie.nxz
+#
+# Bateaux supplémentaires :
+#   - canot_rocca_camping.nxz
+#   - dinghy_rocca_semillante.nxz
+#   - moth_alu_bouchain.nxz

@@ -6,6 +6,7 @@
 # Modèles 3D (volumineux, à récupérer depuis le stockage du client)
 # -----------------------------------------------------------------------------
 assets/models/*.nxz
+assets/models/*.nxs
 
 # -----------------------------------------------------------------------------
 # Binaire du serveur web embarqué (à télécharger depuis GitHub officiel)

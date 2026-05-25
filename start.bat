@@ -4,18 +4,13 @@ REM  Collection Petite Plaisance - Borne 3D
 REM  Lanceur Windows - MODE PRODUCTION (kiosque plein ecran)
 REM
 REM  Pour le DEV (fenetre normale) : utiliser start-dev.bat
-REM
-REM  NOTE IMPORTANTE pour Edge :
-REM  Le kiosque Edge necessite des flags specifiques (--edge-kiosk-type) et
-REM  un profil utilisateur isole (--user-data-dir) pour eviter les conflits
-REM  avec un Edge deja ouvert sur le poste.
 REM ============================================================================
 
 setlocal EnableDelayedExpansion
 
 REM === Configuration ===
-set PORT=8000
-set URL=http://127.0.0.1:%PORT%/
+set "PORT=8000"
+set "URL=http://127.0.0.1:%PORT%/"
 set "BORNE_PROFILE=%~dp0.borne-profile"
 
 REM Se placer dans le dossier du .bat
@@ -36,21 +31,17 @@ if not exist "tools\static-web-server.exe" (
     echo   https://github.com/static-web-server/static-web-server/releases/latest
     echo Choisir : static-web-server-vX.Y.Z-x86_64-pc-windows-msvc.zip
     echo.
-    echo Decompressez et placez static-web-server.exe dans le dossier 'tools'.
-    echo.
     pause
     exit /b 1
 )
 
 REM === 2. Verifier les modeles 3D ===
-set NXZ_MISSING=0
-for %%F in (canoe_sadoux.nxz inti_huatana.nxz dinghy_kirie.nxz) do (
-    if not exist "assets\models\%%F" set NXZ_MISSING=1
+set "NXZ_MISSING=0"
+for %%F in (canoe_sadoux.nxz inti_huatana.nxz dinghy_kirie.nxz canot_rocca_camping.nxz dinghy_rocca_semillante.nxz moth_alu_bouchain.nxz) do (
+    if not exist "assets\models\%%F" set "NXZ_MISSING=1"
 )
 if "!NXZ_MISSING!"=="1" (
     echo [AVERTISSEMENT] Certains modeles 3D sont absents dans assets\models\
-    echo La borne demarrera mais les modeles concernes ne s'afficheront pas.
-    echo.
     timeout /t 3 /nobreak >nul
 )
 
@@ -73,14 +64,16 @@ if exist "%ProgramFiles%\Google\Chrome\Application\chrome.exe" (
 
 if not defined BROWSER (
     echo [ERREUR] Ni Chrome ni Edge n'a ete trouve sur ce poste.
-    echo Installez Google Chrome ou Microsoft Edge avant de lancer la borne.
     pause
     exit /b 1
 )
 
 echo [INFO] Navigateur detecte : !BROWSER_NAME!
+echo [DEBUG] Chemin navigateur   : !BROWSER!
+echo [DEBUG] URL cible           : !URL!
+echo [DEBUG] Profil isole        : !BORNE_PROFILE!
 
-REM === 4. Demarrer le serveur en arriere-plan (fenetre minimisee) ===
+REM === 4. Demarrer le serveur en arriere-plan ===
 echo [INFO] Demarrage du serveur sur le port %PORT%...
 start "Serveur Borne 3D" /MIN "tools\static-web-server.exe" --port %PORT% --root . --host 127.0.0.1 --log-level error
 
@@ -89,25 +82,18 @@ timeout /t 2 /nobreak >nul
 
 REM === 6. Lancer le navigateur en MODE KIOSQUE ===
 echo [INFO] Ouverture du navigateur en MODE KIOSQUE plein ecran...
-echo [INFO] Pour quitter : Alt+F4, ou lancer stop.bat depuis l'explorateur.
+echo [INFO] Pour quitter : Alt+F4, Ctrl+Shift+Q, ou lancer stop.bat
 echo.
 
-REM Flags communs aux deux navigateurs
-set "COMMON_FLAGS=--kiosk --start-fullscreen --noerrdialogs --disable-pinch --overscroll-history-navigation=0 --disable-features=TranslateUI --no-first-run --no-default-browser-check"
-
-REM Profil isole pour la borne (evite les conflits avec une session navigateur existante)
-set "PROFILE_FLAG=--user-data-dir=!BORNE_PROFILE!"
-
-if "!BROWSER_NAME!"=="Edge" (
-    REM Edge necessite --edge-kiosk-type=fullscreen pour vraiment activer le kiosque
-    REM Sans ce flag, --kiosk seul ne fonctionne pas correctement sur Edge.
-    start "" "!BROWSER!" !COMMON_FLAGS! !PROFILE_FLAG! --edge-kiosk-type=fullscreen "%URL%"
+REM IMPORTANT : tous les chemins/URLs entre guillemets pour gerer les espaces
+REM             dans le chemin (ex: C:\Users\Mon Nom\Documents\...)
+if /I "!BROWSER_NAME!"=="Edge" (
+    start "" "!BROWSER!" --kiosk --start-fullscreen --noerrdialogs --disable-pinch --overscroll-history-navigation=0 --disable-features=TranslateUI --no-first-run --no-default-browser-check "--user-data-dir=!BORNE_PROFILE!" --edge-kiosk-type=fullscreen "!URL!"
 ) else (
-    REM Chrome : --kiosk suffit
-    start "" "!BROWSER!" !COMMON_FLAGS! !PROFILE_FLAG! "%URL%"
+    start "" "!BROWSER!" --kiosk --start-fullscreen --noerrdialogs --disable-pinch --overscroll-history-navigation=0 --disable-features=TranslateUI --no-first-run --no-default-browser-check "--user-data-dir=!BORNE_PROFILE!" "!URL!"
 )
 
-REM === 7. Boucle d'attente jusqu'a fermeture du navigateur ===
+REM === 7. Boucle d'attente jusqu'a fermeture ===
 echo [INFO] Borne en cours d'utilisation.
 echo [INFO] Cette fenetre se fermera quand le serveur sera arrete.
 echo.

@@ -181,11 +181,26 @@ function loadProject(id) {
   showLoadingOverlay();
 
   // --- UI texte ---
-  document.getElementById("topTitle").textContent    = proj.topTitle    || "";
-  document.getElementById("topSubtitle").textContent = proj.topSubtitle || "";
+  document.getElementById("topTitle").textContent = proj.topTitle || "";
 
   const planEl = document.getElementById("projectPlan");
   if (planEl) { planEl.src = proj.plan; planEl.alt = `Plan — ${proj.topTitle}`; }
+
+  // Le sous-titre est TOUJOURS rendu (avec un caractère invisible si vide)
+  // pour garder une hauteur uniforme du header entre les 6 bateaux.
+  // Sans ça, les bateaux sans sous-titre auraient leur titre principal qui
+  // "remonte" et créerait une incohérence visuelle.
+  const subtitleEl = document.getElementById("topSubtitle");
+  if (subtitleEl) {
+    if (proj.topSubtitle) {
+      subtitleEl.textContent = proj.topSubtitle;
+      subtitleEl.style.visibility = "";
+    } else {
+      // Caractère invisible (espace insécable) pour garder la hauteur de ligne
+      subtitleEl.textContent = "\u00A0";
+      subtitleEl.style.visibility = "hidden";
+    }
+  }
 
   const textEl = document.getElementById("projectText");
   if (textEl) textEl.innerHTML = proj.text || "";

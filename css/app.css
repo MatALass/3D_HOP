@@ -46,6 +46,16 @@
   /* Miniatures */
   --thumb-size:  clamp(56px, 6vw, 96px);
   --thumb-gap:   clamp(6px, 0.8vw, 12px);
+  --thumb-count: 6;
+  /* Largeur réservée aux miniatures dans le header (pour éviter le
+     chevauchement avec le titre quand celui-ci est long).
+     Formule : (taille × nombre) + (gaps × (nombre - 1)) + marge respiration */
+  --thumbs-area-width: calc(
+    var(--thumb-size) * var(--thumb-count)
+    + var(--thumb-gap) * (var(--thumb-count) - 1)
+    + var(--page-pad)
+    + 16px
+  );
 
   /* Colonnes */
   --right-col:   clamp(320px, 28vw, 560px);
@@ -173,9 +183,14 @@ body {
 
 /* -----------------------------------------------------------------------------
    5. Header (titres)
+   -----------------------------------------------------------------------------
+   Le padding-left réserve la zone occupée par les miniatures (en position
+   absolute, en haut à gauche). Sans ça, un titre long comme
+   "MOTH ALU À BOUCHAINS" passerait derrière les miniatures.
    ----------------------------------------------------------------------------- */
 header {
   padding-top: 12px;
+  padding-left: var(--thumbs-area-width);
   text-align: center;
   pointer-events: none;
 }

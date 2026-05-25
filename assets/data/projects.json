@@ -37,6 +37,42 @@
       "toolbar": "bottom-right",
       "footnote": "Modèle CC_EA / powered by 3DHOP",
       "text": "<h3>La Josette — Dinghy Kirié</h3><p>Texte de présentation du dinghy. À compléter par le client.</p>"
+    },
+    {
+      "id": 4,
+      "nxz": "assets/models/canot_rocca_camping.nxz",
+      "thumbnail": "assets/images/boats/canot_rocca_camping.jpg",
+      "topTitle": "CANOË CAMPING ROCCA",
+      "topSubtitle": "",
+      "plan": "assets/images/plans/plan_canot_rocca_camping.png",
+      "bg": "assets/images/backgrounds/fond_CC_2b.png",
+      "toolbar": "bottom-right",
+      "footnote": "Modèle CC_EA / powered by 3DHOP",
+      "text": "<h3>Canoë Camping Rocca</h3><p>Texte de présentation du canoë Camping Rocca. À compléter par le client.</p>"
+    },
+    {
+      "id": 5,
+      "nxz": "assets/models/dinghy_rocca_semillante.nxz",
+      "thumbnail": "assets/images/boats/dinghy_rocca_semillante.jpg",
+      "topTitle": "LA SÉMILLANTE",
+      "topSubtitle": "DINGHY ROCCA",
+      "plan": "assets/images/plans/plan_dinghy_rocca_semillante.png",
+      "bg": "assets/images/backgrounds/fond_CC_4b.png",
+      "toolbar": "bottom-right",
+      "footnote": "Modèle CC_EA / powered by 3DHOP",
+      "text": "<h3>La Sémillante — Dinghy Rocca</h3><p>Texte de présentation du dinghy Rocca « La Sémillante ». À compléter par le client.</p>"
+    },
+    {
+      "id": 6,
+      "nxz": "assets/models/moth_alu_bouchain.nxz",
+      "thumbnail": "assets/images/boats/moth_alu_bouchain.jpg",
+      "topTitle": "N’OUBLIE JAMAIS",
+      "topSubtitle": "MOTH ALU À BOUCHAINS",
+      "plan": "assets/images/plans/plan_moth_alu_bouchain.png",
+      "bg": "assets/images/backgrounds/fond_CC_2b.png",
+      "toolbar": "bottom-right",
+      "footnote": "Modèle CC_EA / powered by 3DHOP",
+      "text": "<h3>N'oublie jamais — Moth alu à bouchains</h3><p>Texte de présentation du moth aluminium à bouchains « N'oublie jamais ». À compléter par le client.</p>"
     }
   ]
 }

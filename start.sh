@@ -48,7 +48,7 @@ fi
 
 # 2. Verifier les modeles 3D
 MISSING=0
-for f in canoe_sadoux.nxz inti_huatana.nxz dinghy_kirie.nxz; do
+for f in canoe_sadoux.nxz inti_huatana.nxz dinghy_kirie.nxz canot_rocca_camping.nxz dinghy_rocca_semillante.nxz moth_alu_bouchain.nxz; do
   if [ ! -f "assets/models/$f" ]; then
     MISSING=1
   fi
