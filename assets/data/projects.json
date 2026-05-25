@@ -12,7 +12,7 @@
       "bg": "assets/images/backgrounds/fond_CC_2b.png",
       "toolbar": "bottom-right",
       "footnote": "Modèle CC_EA / powered by 3DHOP",
-      "text": "<h3>Le Pingoin — Canoë Sadoux</h3><p>Texte de présentation du canoë Sadoux. À compléter par le client : période, propriétaire historique, particularités techniques, anecdotes…</p>"
+      "text": "<h3>Canoë Sadoux « Le Pingoin »</h3><p><strong>Date :</strong> circa 1945<br/><strong>Constructeur :</strong> Albert Sadoux, La Varenne-Saint-Hilaire</p><p><strong>Longueur :</strong> 4,50 m<br/><strong>Maître-bau :</strong> 0,85 m</p><p><strong>Construction :</strong> bois</p>"
     },
     {
       "id": 2,
@@ -24,7 +24,7 @@
       "bg": "assets/images/backgrounds/fond_CC_4b.png",
       "toolbar": "left-vertical",
       "footnote": "Modèle CC_EA / powered by 3DHOP",
-      "text": "<h3>Inti Huatana — Yole d'aviron</h3><p>Texte de présentation de la yole. À compléter par le client.</p>"
+      "text": "<h3>Yole d'aviron « Inti Huatana »</h3><p><strong>Date :</strong> 1940-1950<br/><strong>Constructeur :</strong> non renseigné</p><p><strong>Longueur :</strong> 4,85 m<br/><strong>Maître-bau :</strong> 1,10 m</p><p><strong>Construction :</strong> bois</p>"
     },
     {
       "id": 3,
@@ -36,7 +36,7 @@
       "bg": "assets/images/backgrounds/fond_CC_2b.png",
       "toolbar": "bottom-right",
       "footnote": "Modèle CC_EA / powered by 3DHOP",
-      "text": "<h3>La Josette — Dinghy Kirié</h3><p>Texte de présentation du dinghy. À compléter par le client.</p>"
+      "text": "<h3>Dinghy Kirié « La Josette »</h3><p><strong>Date :</strong> 1961<br/><strong>Constructeur :</strong> Kirié, Les Sables d'Olonne</p><p><strong>Longueur :</strong> 3,89 m<br/><strong>Maître-bau :</strong> 1,35 m</p><p><strong>Construction :</strong> bois</p>"
     },
     {
       "id": 4,
@@ -48,7 +48,7 @@
       "bg": "assets/images/backgrounds/fond_CC_2b.png",
       "toolbar": "bottom-right",
       "footnote": "Modèle CC_EA / powered by 3DHOP",
-      "text": "<h3>Canoë Camping Rocca</h3><p>Texte de présentation du canoë Camping Rocca. À compléter par le client.</p>"
+      "text": "<h3>Canoë Camping Rocca</h3><p><strong>Date :</strong> 1961<br/><strong>Constructeur :</strong> Rocca, Vitry-sur-Seine</p><p><strong>Longueur :</strong> 4,70 m<br/><strong>Maître-bau :</strong> 1,10 m</p><p><strong>Construction :</strong> bois</p>"
     },
     {
       "id": 5,
@@ -60,7 +60,7 @@
       "bg": "assets/images/backgrounds/fond_CC_4b.png",
       "toolbar": "bottom-right",
       "footnote": "Modèle CC_EA / powered by 3DHOP",
-      "text": "<h3>La Sémillante — Dinghy Rocca</h3><p>Texte de présentation du dinghy Rocca « La Sémillante ». À compléter par le client.</p>"
+      "text": "<h3>Dinghy Rocca « La Sémillante »</h3><p><strong>Date :</strong> circa 1954<br/><strong>Constructeur :</strong> Rocca, Vitry-sur-Seine<br/><em>François Sergent architecte</em></p><p><strong>Longueur :</strong> 3,65 m<br/><strong>Maître-bau :</strong> 1,40 m</p><p><strong>Construction :</strong> bois</p>"
     },
     {
       "id": 6,
@@ -72,7 +72,7 @@
       "bg": "assets/images/backgrounds/fond_CC_2b.png",
       "toolbar": "bottom-right",
       "footnote": "Modèle CC_EA / powered by 3DHOP",
-      "text": "<h3>N'oublie jamais — Moth alu à bouchains</h3><p>Texte de présentation du moth aluminium à bouchains « N'oublie jamais ». À compléter par le client.</p>"
+      "text": "<h3>Moth alu à bouchains « N'oublie jamais »</h3><p><strong>Date :</strong> 1947-1952<br/><strong>Constructeur :</strong> Gouget, Paris 16ᵉ</p><p><strong>Longueur :</strong> 3,35 m<br/><strong>Maître-bau :</strong> 1,32 m</p><p><strong>Construction :</strong> alliage d'aluminium</p>"
     }
   ]
 }
